@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from "react-redux";
+import {
+  HighlightSelectorBar,
+  HighlightableTextArea,
+  HighlightsFilterBar,
+  ActivatedHighlights
+} from "./containers";
+import createStore from "./createStore";
 
 function App() {
+  const store = createStore();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <HighlightSelectorBar />
+        <HighlightableTextArea width={500} height={100} />
+        <HighlightsFilterBar />
+        <ActivatedHighlights />
+      </div>
+    </Provider>
   );
 }
 
