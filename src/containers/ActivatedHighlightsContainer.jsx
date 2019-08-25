@@ -3,5 +3,7 @@ import { connect } from "react-redux";
 import { ActivatedHighlights } from "../components";
 
 export default connect(
-  ({ filteredHighlights }) => ({ filteredHighlights })
+  ({ highlights: { filteredIds, byId } }) => ({ 
+    highlights: filteredIds.map(id => byId[id])
+  })
 )(ActivatedHighlights);

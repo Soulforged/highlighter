@@ -7,10 +7,7 @@ import {
 import { HighlightsFilterBar } from "../components";
 
 export default connect(
-  ({
-    highlighterColors,
-    selectedHighlightOptions
-  }) => ({ highlighterColors, selectedHighlightOptions }),
+  ({ highlights: { filter } }) => ({ filter }),
   {
     addSelectedHighlightOption,
     removeSelectedHighlightOption

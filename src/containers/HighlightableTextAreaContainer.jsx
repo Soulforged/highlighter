@@ -1,11 +1,18 @@
 //@flow
 import { connect } from "react-redux";
 import {
-  addHighlight
+  addHighlight,
+  clearHighlights
 } from "../actions";
 import { HighlightableTextArea } from "../components";
 
 export default connect(
-  ({ highlights, highlightColor }) => ({ highlights, highlightColor }),
-  { addHighlight }
+  ({
+    highlights: { byId, ids },
+    highlightColor
+  }) => ({
+    highlights: ids.map(id => byId[id]),
+    highlightColor
+  }),
+  { addHighlight, clearHighlights }
 )(HighlightableTextArea);

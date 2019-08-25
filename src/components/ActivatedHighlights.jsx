@@ -2,13 +2,13 @@
 import React from "react";
 import HighlightedText from "./HighlightedText";
 
-const renderActivatedHighlights = filteredHighlights => (
-  filteredHighlights.map(({ text, width, color, id }) =>
+const renderActivatedHighlights = highlights => (
+  highlights.map(({ text, width, color, id }) =>
     <HighlightedText key={id} text={text} width={width} color={color} />
   )
 );
 
-export default ({ filteredHighlights }) => (
+export default ({ highlights }) => (
   <div style={{
     overflow: "auto",
     width: 500,
@@ -16,6 +16,6 @@ export default ({ filteredHighlights }) => (
     padding: 3,
     border: "1px solid black"
   }}>
-    {renderActivatedHighlights(filteredHighlights)}
+    {renderActivatedHighlights(highlights)}
   </div>
 );

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component tests renders filters with selections 1`] = `
+<div>
+  <div
+    style="flex-direction: row; padding: 10px;"
+  >
+    <button
+      data-testid="red"
+      style="width: 50px; height: 32px; margin: 5px; background-color: red; border: 3px solid black;"
+    />
+    <button
+      data-testid="yellow"
+      style="width: 50px; height: 32px; margin: 5px; background-color: yellow; border: 3px solid blue;"
+    />
+    <button
+      data-testid="green"
+      style="width: 50px; height: 32px; margin: 5px; background-color: green; border: 3px solid black;"
+    />
+  </div>
+</div>
+`;
+
+exports[`component tests renders highlights when text gets selected in the a HighlightableTextArea 1`] = `
+<div>
+  <div
+    style="position: relative;"
+  >
+    <div
+      style="background-color: white; overflow: auto; position: absolute; height: 100px; width: 500px; top: 0px; left: 0px; z-index: -1; margin: 0px; border-radius: 0; padding: 3px;"
+    >
+      
+      <mark
+        data-testid="0_1"
+        style="position: absolute; left: 0px; top: 1px; background-color: red; width: 200px;"
+      />
+    </div>
+    <textarea
+      data-testid="highlightableTxtArea"
+      style="width: 500px; height: 100px; background-color: transparent; margin: 0px; border-radius: 0;"
+    />
+  </div>
+</div>
+`;

@@ -1,24 +1,34 @@
-//@flow
 import React from "react";
 
-type Props = {
-  x: number,
-  y: number,
-  width: number,
-  color: string
-}
 
-export default ({ x, y, color, width, id }: Props) => (
+type Props = {
+  //absolute x coordinate for the mark, from the left of its container
+  x: number,
+  //absolute y coordinate for the mark, from the top of its container
+  y: number,
+  //any valid color string @see config#HIGHLIGHTER_COLORS
+  color: string,
+  //fixed width of the mark
+  width: number,
+  //fixed height of the mark
+  height: number
+};
+
+/**
+* A colored highlight
+*
+* @param { Props } properties
+**/
+export default ({ x, y, color, width, height, id }: Props) => (
   <mark
     data-testid={id}
     style={{
       position: "absolute",
-      left: x + 1,
-      top: y - 6,
+      left: x,
+      top: y,
       backgroundColor: color,
-      color: "transparent",
-      width: width,
-      height: "1.1em"
+      width,
+      height
     }}
   />
 );

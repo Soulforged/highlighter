@@ -1,10 +1,11 @@
 //@flow
 import React from "react";
 import HighlightOption from "./HighlightOption";
+import { HIGHLIGHTER_COLORS } from "../config";
 
-export default ({ highlighterColors, setHighlightColor, highlightColor }) => (
+export default ({ setHighlightColor, highlightColor }) => (
   <div style={{ flexDirection: "row", padding: 10 }}>
-    {highlighterColors.map(color => (
+    {HIGHLIGHTER_COLORS.map(color => (
       <HighlightOption
         key={color}
         onSelected={() => setHighlightColor(color)}
