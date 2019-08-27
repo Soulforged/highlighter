@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`highlightable text area tests renders highlights when text gets selected in the a HighlightableTextArea 1`] = `
+<div>
+  <div
+    style="position: relative;"
+  >
+    <div
+      style="width: 500px; height: 100px; white-space: pre-wrap; padding: 2px; border: 1px solid rgb(169, 169, 169); background-color: transparent; resize: none; overflow: auto; position: absolute; top: 0px; left: 0px; z-index: -1;"
+    >
+      <span />
+      <mark
+        data-testid="0_1_0"
+        style="position: absolute; left: 0px; top: 1px; background-color: red; width: 200px; height: 13px;"
+      />
+    </div>
+    <textarea
+      data-testid="highlightableTxtArea"
+      style="width: 500px; height: 100px; white-space: pre-wrap; padding: 2px; border: 1px solid rgb(169, 169, 169); background-color: transparent; resize: none;"
+    />
+  </div>
+</div>
+`;

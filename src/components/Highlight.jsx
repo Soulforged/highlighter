@@ -11,7 +11,8 @@ type Props = {
   //fixed width of the mark
   width: number,
   //fixed height of the mark
-  height: number
+  height: number,
+  id: string
 };
 
 /**

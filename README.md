@@ -25,6 +25,11 @@ In a shell inside the root folder.
 
 ## Notes
 Some outstanding questions to which answers were presupposed:
+* Can I use a div with containerEditable?
+>> I've decided that since the requirements specifically mention a "text area"
+   then the challenge was to achieve this using textarea and not a div. Using
+   a div would have facilitated the range management since it supports selections.
+
 * What should happen when the text changes?
 >> I've decided to clear the highlights when this happens, keeping them on a text
    than might no longer match the same words and positions will be confusing for
@@ -42,6 +47,13 @@ Some outstanding questions to which answers were presupposed:
    range is a strict intersection of the existing highlight's range the system
    keeps the newest highlight.
 
+I've also used flow semantics to document properties but didn't include flow at
+all because I wasn't sure if that would violate the "no third party libraries" rule.
+
+I've used functional programming whenever possible since I didn't see any requirement
+against that.
+
 ## Known issues
-If the user selects a range that spans more than one line, then the highlight
-will be spanning all of those lines completely
+The textarea has been set to not resize, this simplifies the management of highlights
+otherwise the highlights should have been either removed completely or expanded or
+shrinked accordingly.
