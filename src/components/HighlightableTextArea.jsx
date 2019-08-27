@@ -52,12 +52,6 @@ export default ({
 }: Props) => {
   const shadowRef = useRef(null);
   const textRef = useRef(null);
-  // const [textCopy,setTextCopy] = useState("");
-  // const reset = ({ target: { value } }) => {
-  //   clearHighlights();
-  //   setText()
-  //   setTextCopy(value);
-  // };
   useLayoutEffect(() => {
     if (textRef.current && shadowRef.current) {
       const style = textRef.current.style;
@@ -88,8 +82,9 @@ export default ({
         data-testid="highlightableTxtArea"
         onSelect={createAndAddHighlight(props, shadowRef)}
         onChange={({ target: { value } }) => setText(value)}
-        onScroll={({ target: { scrollTop, scrollLeft } }) =>
-          shadowRef.current.scrollTo(scrollLeft, scrollTop)}
+        onScroll={({ target: { scrollTop, scrollLeft } }) => {
+          shadowRef.current.scrollTop = scrollTop;
+        }}
       />
     </div>
   );

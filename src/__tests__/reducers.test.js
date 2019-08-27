@@ -129,27 +129,31 @@ describe("reducer tests", () => {
       text: "some text",
       width: 200,
       color: "red",
-      id: "1"
+      id: "1",
+      start: 3,
     };
     const greenHighlights = [
       {
         text: "some text",
         width: 200,
         color: "green",
-        id: "2"
+        id: "2",
+        start: 1,
       },
       {
         text: "some text",
         width: 200,
         color: "green",
-        id: "3"
+        id: "3",
+        start: 2
       }
     ];
     const existingHighlights = [redHighlight,{
       text: "some text",
       width: 200,
       color: "yellow",
-      id: "4"
+      id: "4",
+      start: 5
     }, ...greenHighlights];
     const onlyRedsState = rootReducer(
       { ...initialState,
@@ -170,8 +174,8 @@ describe("reducer tests", () => {
       addSelectedHighlightOption("green")
     );
     expect(redsAndGreensState.highlights.filteredIds).toEqual([
-      redHighlight.id,
-      ...greenHighlights.map(({ id }) => id)
+      ...greenHighlights.map(({ id }) => id),
+      redHighlight.id
     ]);
     const noRedsState = rootReducer(redsAndGreensState, removeSelectedHighlightOption("red"));
     expect(noRedsState.highlights.filteredIds).toEqual(greenHighlights.map(({ id }) => id));

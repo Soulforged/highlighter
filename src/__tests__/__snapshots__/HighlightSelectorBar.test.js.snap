@@ -3,7 +3,7 @@
 exports[`highlight selector bar tests attempts to change selected color on option selected 1`] = `
 <div>
   <div
-    style="flex-direction: row; padding: 10px;"
+    style="flex-direction: row; padding: 10px; display: flex;"
   >
     <button
       data-testid="red"
@@ -32,7 +32,7 @@ exports[`highlight selector bar tests attempts to change selected color on optio
 exports[`highlight selector bar tests attempts to clear highlights 1`] = `
 <div>
   <div
-    style="flex-direction: row; padding: 10px;"
+    style="flex-direction: row; padding: 10px; display: flex;"
   >
     <button
       data-testid="red"

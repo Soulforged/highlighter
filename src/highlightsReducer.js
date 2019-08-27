@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
       const newFilter = [...filter, action.color];
       const newFilteredIds = ids.reduce((acc, id) => (
         addNewFilteredId(newFilter, acc, byId, id)
-      ), filteredIds)
+      ), filteredIds);
       return {
         ...state,
         filter: newFilter,

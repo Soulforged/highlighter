@@ -3,6 +3,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Allows a user to write or copy text into a text area and then highlight it using
 different colors. The highlighted portions can be filtered by the user.
 
+NOTE: you can use npm instead of yarn for any of the following commands.
+
 ## Usage
 To start the application execute:
 
@@ -48,6 +50,14 @@ Some outstanding questions to which answers were presupposed:
    range is a strict intersection of the existing highlight's range the system
    keeps the newest highlight, this should be less confusing for the user.
 
+I've used react-testing-library to perform some DOM testing, I'm not sure if this
+violates the "no third party" rule, but I thought having those tests actually adds
+necessary value.
+
+The example on the requirement shows the filtered text displayed on a top to bottom
+fashion, I just changed that for a natural text flow from left to right since I
+considered it more readable that way.
+
 I've also used flow semantics to document properties but didn't include flow at
 all because I wasn't sure if that would violate the "no third party libraries" rule.
 
@@ -59,10 +69,13 @@ I didn't fully get what this excerpt from the assignemnt is supposed to mean:
 "Additional features like a modal popup on highlighting the text, formatting the text etc."
 
 What is that modal supposed to show? What purpose should it serve? What text should be formatted and why?
-Since I couldn't come up with valid answers to those questions I didn't implement anything in that regard. 
+Since I couldn't come up with valid answers to those questions I didn't implement anything in that regard.
 
 
 ## Known issues
 The textarea has been set to not resize, this simplifies the management of highlights
 otherwise the highlights should have been either removed completely or expanded or
 shrinked accordingly.
+
+I couldn't test the application on a Windows box because I lack access to one,
+so I couldn't test it in IE or Edge.
