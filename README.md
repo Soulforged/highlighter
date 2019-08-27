@@ -25,7 +25,7 @@ In a shell inside the root folder.
 
 ## Notes
 Some outstanding questions to which answers were presupposed:
-* Can I use a div with containerEditable?
+* Can I use a div with contentEditable?
 >> I've decided that since the requirements specifically mention a "text area"
    then the challenge was to achieve this using textarea and not a div. Using
    a div would have facilitated the range management since it supports selections.
@@ -33,10 +33,10 @@ Some outstanding questions to which answers were presupposed:
 * What should happen when the text changes?
 >> I've decided to clear the highlights which content changes when this happens,
    keeping them on a text that might no longer match the same words and positions
-   will be confusing for the user.
+   could be confusing for the user.
 
 * What should happen if two or more highlights overlap?
->> I've decided to keep the original highlights are they're, the last one will
+>> I've decided to keep the original highlights as they're, the last one will
    be visible on top of the others for the overlapping ranges, but the highlight
    data itself will remain unchanged since I don't know what is the expected
    behaviour for this.
@@ -53,6 +53,14 @@ all because I wasn't sure if that would violate the "no third party libraries" r
 
 I've used functional programming whenever possible since I didn't see any requirement
 against that.
+
+I didn't fully get what this excerpt from the assignemnt is supposed to mean:
+
+"Additional features like a modal popup on highlighting the text, formatting the text etc."
+
+What is that modal supposed to show? What purpose should it serve? What text should be formatted and why?
+Since I couldn't come up with valid answers to those questions I didn't implement anything in that regard. 
+
 
 ## Known issues
 The textarea has been set to not resize, this simplifies the management of highlights
