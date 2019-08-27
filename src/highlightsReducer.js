@@ -2,7 +2,8 @@ import {
   ADD_HIGHLIGHT,
   CLEAR_HIGHTLIGHTS,
   ADD_SELECTED_HIGHLIGHT_OPTION,
-  REMOVE_SELECTED_HIGHLIGHT_OPTION
+  REMOVE_SELECTED_HIGHLIGHT_OPTION,
+  SET_TEXT
 } from "./actions";
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
 const addNewFilteredId = (filter, filteredIds, byId, id) => {
   const { color } = byId[id];
   if (filter.indexOf(color) !== -1 && filteredIds.indexOf(id) === -1) {
-    return [...filteredIds, id].sort((id1, id2) => byId[id1].start > byId[id2].start ? 1 : -1);
+    return [...filteredIds, id]
+      .sort((id1, id2) => byId[id1].start > byId[id2].start ? 1 : -1);
   }
   return filteredIds;
 }
@@ -65,6 +67,24 @@ export default (state = initialState, action) => {
         ...state,
         filteredIds: filteredIds.filter(id => byId[id].color !== action.color),
         filter: newFilter
+      };
+    }
+
+    case SET_TEXT: {
+      const { text } = action;
+      const remainingValidIds = ids.filter(id => {
+        const { start, end, text: highlightText } = byId[id];
+        const substring = text.substring(start, end);
+        return highlightText === substring;
+      });
+      const remainingValidFilteredIds = filteredIds.filter(
+        id => remainingValidIds.indexOf(id) !== -1);
+      const newById = remainingValidIds.reduce((acc, key) => ({ ...acc, [key]: byId[key] }), {});
+      return {
+        ...state,
+        ids: remainingValidIds,
+        filteredIds: remainingValidFilteredIds,
+        byId: newById
       };
     }
 

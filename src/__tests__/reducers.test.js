@@ -3,6 +3,7 @@ import {
   addSelectedHighlightOption,
   removeSelectedHighlightOption,
   addHighlight,
+  setText,
   clearHighlights
 } from "../actions";
 import rootReducer from "../reducers";
@@ -11,6 +12,51 @@ describe("reducer tests", () => {
   const initialState = {
     highlights: { filter: [], ids: [], byId: {}, filteredIds: [] }
   };
+
+  it("sets the text", () => {
+    const newState = rootReducer(initialState, setText("a new text"));
+    expect(newState.text).toEqual("a new text");
+  });
+
+  it("clears all highlights", () => {
+    const newState = rootReducer(
+      {
+        ...initialState,
+        highlights: {
+          ids: ["1", "2"],
+          byId: { "1": {}, "2": {} },
+          filteredIds: ["1"]
+        }
+      },
+      clearHighlights()
+    );
+    expect(newState.highlights.ids).toEqual([]);
+    expect(newState.highlights.byId).toEqual({});
+    expect(newState.highlights.filteredIds).toEqual([]);
+  });
+
+  it("only removes highlights that do not inersect with new text", () => {
+    const newState = rootReducer(
+      {
+        ...initialState,
+        text: "abbc",
+        highlights: {
+          filteredIds: ["2"],
+          filter: [],
+          ids: ["1","2"],
+          byId: {
+            "1": { start: 0, end: 2, text: "ab" },
+            "2": { start: 2, end: 4, text: "bc" }
+          }
+        }
+      },
+      setText("abb")
+    );
+    expect(newState.text).toEqual("abb");
+    expect(newState.highlights.ids).toEqual(["1"]);
+    expect(newState.highlights.byId["2"]).toBe(undefined);
+    expect(newState.highlights.filteredIds).toEqual([]);
+  });
 
   it("sets current highlight color", () => {
     const newState = rootReducer(initialState, setHighlightColor("red"));
@@ -47,25 +93,6 @@ describe("reducer tests", () => {
     expect(newState.highlights.filter).toEqual(["yellow"]);
   });
 
-  it("resets highlights and filtered highlights on clear", () => {
-    const newState = rootReducer(
-      {
-        ...initialState,
-        highlights: {
-          ids: ["1"],
-          filteredIds: ["1"],
-          byId: { "1": { id: "1" } },
-          filter: ["red", "yellow"]
-        }
-      },
-      clearHighlights()
-    );
-    expect(newState.highlights).toEqual({
-      ...initialState.highlights,
-      filter: ["red","yellow"]
-    });
-  });
-
   it("adds highlights and filter them automatically for activated filters", () => {
     const highlight = {
       text: "some text",
@@ -100,8 +127,6 @@ describe("reducer tests", () => {
   it("sets filter and filters highlights automatically", () => {
     const redHighlight = {
       text: "some text",
-      x: 0,
-      y: 1,
       width: 200,
       color: "red",
       id: "1"
@@ -109,16 +134,12 @@ describe("reducer tests", () => {
     const greenHighlights = [
       {
         text: "some text",
-        x: 0,
-        y: 1,
         width: 200,
         color: "green",
         id: "2"
       },
       {
         text: "some text",
-        x: 0,
-        y: 1,
         width: 200,
         color: "green",
         id: "3"
@@ -126,8 +147,6 @@ describe("reducer tests", () => {
     ];
     const existingHighlights = [redHighlight,{
       text: "some text",
-      x: 0,
-      y: 1,
       width: 200,
       color: "yellow",
       id: "4"
@@ -158,5 +177,29 @@ describe("reducer tests", () => {
     expect(noRedsState.highlights.filteredIds).toEqual(greenHighlights.map(({ id }) => id));
     const noFilterState = rootReducer(noRedsState, removeSelectedHighlightOption("green"));
     expect(noFilterState.highlights.filteredIds).toEqual([]);
+  });
+
+  it("does not add a highlight that matches the exact range of an existing highlight", () => {
+    const highlight = {
+      text: "some text",
+      x: 0,
+      y: 1,
+      width: 200,
+      color: "red",
+      id: "2"
+    };
+    const newState = rootReducer(
+      {
+        ...initialState,
+        highlights: {
+          ...initialState.highlights,
+          filter: ["red"],
+          ids: ["2"],
+          byId: { "2": highlight }
+        }
+      },
+      addHighlight(highlight)
+    );
+    expect(newState.highlights.ids).toEqual(["2"]);
   });
 });

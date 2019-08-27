@@ -26,4 +26,18 @@ describe("highlight selector bar tests", () => {
     expect(setHighlightColor).toHaveBeenCalledWith("yellow");
     expect(container).toMatchSnapshot();
   });
+
+  it("attempts to clear highlights", () => {
+    const clearHighlights = jest.fn();
+    const { container, getByTestId } = render((
+      <HighlightSelectorBar
+        highlightColor="red"
+        clearHighlights={clearHighlights}
+      />
+    ));
+    const clearOption = getByTestId("clearHighlightsBtn");
+    fireEvent.click(clearOption);
+    expect(clearHighlights).toHaveBeenCalled();
+    expect(container).toMatchSnapshot();
+  });
 });

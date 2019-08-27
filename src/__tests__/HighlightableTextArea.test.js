@@ -22,30 +22,36 @@ describe("highlightable text area tests", () => {
 
   it("renders highlights when text gets selected in the a HighlightableTextArea", () => {
     const { container, getByTestId } = render((
-      <HighlightableTextArea highlights={highlights} clearHighlights={jest.fn()} />
+      <HighlightableTextArea
+        setText={jest.fn()}
+        highlights={highlights}
+      />
     ));
     const mark = getByTestId("0_1_0");
     expect(mark).not.toBe(null);
     expect(container).toMatchSnapshot();
   });
 
-  it("attempts to clearHighlights when value changes in HighlightableTextArea", () => {
-    const clearHighlights = jest.fn();
+  it("attempts to setText when value changes in HighlightableTextArea", () => {
+    const setText = jest.fn();
     const { container, getByTestId } = render((
-      <HighlightableTextArea highlights={highlights} clearHighlights={clearHighlights} />
+      <HighlightableTextArea
+        setText={setText}
+        highlights={highlights}
+      />
     ));
     const textArea = getByTestId("highlightableTxtArea");
     fireEvent.change(textArea, { target: { value: "Lorem ipsum dolor" } });
-    expect(clearHighlights).toHaveBeenCalled();
+    expect(setText).toHaveBeenCalledWith("Lorem ipsum dolor");
   });
 
   it("allows to add new highlights by selecting text over HighlightableTextArea", () => {
     const addHighlightMock = jest.fn();
     const { getByTestId } = render((
       <HighlightableTextArea
+        setText={jest.fn()}
         addHighlight={addHighlightMock}
         highlightColor="red"
-        clearHighlights={jest.fn()}
       />
     ));
     const textArea = getByTestId("highlightableTxtArea");

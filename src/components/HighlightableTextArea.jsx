@@ -1,5 +1,5 @@
 //@flow
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import Highlight from "./Highlight";
 
 type Props = {
@@ -45,16 +45,19 @@ const shadowContainerStyles = {
 export default ({
   highlights = [],
   clearHighlights,
+  setText,
   style,
+  text,
   ...props
 }: Props) => {
   const shadowRef = useRef(null);
   const textRef = useRef(null);
-  const [textCopy,setTextCopy] = useState("");
-  const reset = ({ target: { value } }) => {
-    clearHighlights();
-    setTextCopy(value);
-  };
+  // const [textCopy,setTextCopy] = useState("");
+  // const reset = ({ target: { value } }) => {
+  //   clearHighlights();
+  //   setText()
+  //   setTextCopy(value);
+  // };
   useLayoutEffect(() => {
     if (textRef.current && shadowRef.current) {
       const style = textRef.current.style;
@@ -70,7 +73,7 @@ export default ({
         ref={shadowRef}
         style={{ ...sharedStyles, ...style }}
       >
-        <span>{textCopy}</span>
+        <span>{text}</span>
         {renderHighlights(highlights)}
       </div>
       <textarea
@@ -81,9 +84,10 @@ export default ({
           resize: "none",
           ...style
         }}
+        value={text}
         data-testid="highlightableTxtArea"
         onSelect={createAndAddHighlight(props, shadowRef)}
-        onChange={reset}
+        onChange={({ target: { value } }) => setText(value)}
         onScroll={({ target: { scrollTop, scrollLeft } }) =>
           shadowRef.current.scrollTo(scrollLeft, scrollTop)}
       />
