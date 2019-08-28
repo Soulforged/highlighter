@@ -71,6 +71,10 @@ I didn't fully get what this excerpt from the assignemnt is supposed to mean:
 What is that modal supposed to show? What purpose should it serve? What text should be formatted and why?
 Since I couldn't come up with valid answers to those questions I didn't implement anything in that regard.
 
+## Improvements
+In addition to handling scrolling, ranges spanning more than one line and the text changing
+(though I'm not sure if that can be considered an improvement) I added a "Clear" 
+button to facilitate manual testing.
 
 ## Known issues
 The textarea has been set to not resize, this simplifies the management of highlights
